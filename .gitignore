@@ -1,0 +1,12 @@
+# Python
+backend/venv/
+__pycache__/
+backend/.env
+
+# Xcode
+DerivedData/
+*.xcworkspace
+*.xcuserdata
+
+# macOS
+.DS_Store
