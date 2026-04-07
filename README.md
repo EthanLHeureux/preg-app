@@ -21,7 +21,7 @@ This is the FastAPI backend for the Pregnancy App. It connects to MongoDB Atlas.
     Run this in your terminal to allow Python to talk to MongoDB:
         /Applications/Python\ 3.12/Install\ Certificates.command
 
-5. **Ask Dev for DB_Key and store in .venv file**
+5. **Ask Dev for DB_Key and store in .env file**
 
 6. **Spin Up to start the app:**
     uvicorn app.main:app --reload
