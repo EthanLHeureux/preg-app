@@ -8,8 +8,11 @@ This is the FastAPI backend for the Pregnancy App. It connects to MongoDB Atlas.
     cd backend
 
 2. **Vitural enviroment:**
-    python3 -m venv venv
-    source venv/bin/activate
+    Create:
+        python3 -m venv venv
+
+    Activate:
+        source venv/bin/activate
 
 3. **Isntall Dependencies:**
     pip install fastapi uvicorn motor pydantic-settings certifi
@@ -21,5 +24,4 @@ This is the FastAPI backend for the Pregnancy App. It connects to MongoDB Atlas.
 5. **Ask Dev for DB_Key and store in .venv file**
 
 6. **Spin Up to start the app:**
-    source venv/bin/activate
-    uvicorn app.main:app --reloadf
+    uvicorn app.main:app --reload
