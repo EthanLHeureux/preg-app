@@ -10,8 +10,8 @@ async def create_user_profile(user: UserProfile = Body(...)):
     user_data = user.model_dump(by_alias=True, exclude_unset=True)
 
     # 2. If the ID is None, remove it so MongoDB generates a fresh one
-    if user_data.get("_id") is None:
-        user_data.pop("_id", None)
+    # if user_data.get("_id") is None:
+    user_data.pop("_id", None)
 
     # Convert date to datetime so MongoDB can store it
     if isinstance(user_data.get("dueDate"), date):

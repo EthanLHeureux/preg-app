@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field, ConfigDict
 from typing import Optional
-from datetime import date
+from datetime import datetime
 
 class UserProfile(BaseModel):
     model_config = ConfigDict(populate_by_name=True)
@@ -9,7 +9,7 @@ class UserProfile(BaseModel):
     password: str
     name: str
     current_week: int
-    dueDate: date
+    dueDate: datetime
 
 
 class Mother(BaseModel):
