@@ -26,7 +26,7 @@ class Week(BaseModel):
 class UserProfile(BaseModel):
     model_config = ConfigDict(populate_by_name=True)
     id: Optional[str] = Field(None, alias="_id")
-    email: str
+    email: EmailStr
     password: str
     name: str
     current_week: int

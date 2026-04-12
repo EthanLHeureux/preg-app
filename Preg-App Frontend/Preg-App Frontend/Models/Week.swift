@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PregnancyWeek: Codable {
+nonisolated struct PregnancyWeek: Codable {
     let week: Int
     let mother: Mother
     let baby: Baby

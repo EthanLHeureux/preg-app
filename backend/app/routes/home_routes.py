@@ -3,7 +3,7 @@ from app.database import db
 
 router = APIRouter()
 
-@router.get("/home")
+@router.get("/home/{week}")
 async def get_home_data(week: int):
     
     # 1. Fetch the home data from MongoDB
