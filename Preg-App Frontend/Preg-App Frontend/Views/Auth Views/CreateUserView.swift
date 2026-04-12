@@ -59,9 +59,10 @@ struct CreateUserView: View {
             .padding()
 
 
-            .navigationDestination(isPresented: $authViewModel.isLoggedIn) {
+            .navigationDestination(isPresented: $authViewModel.didCreateAccount) {
                 LoginView()
             }
+            .navigationBarBackButtonHidden(true)
         }
     }
 }

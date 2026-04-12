@@ -12,6 +12,7 @@ import Combine
 class AuthViewModel: ObservableObject {
     @Published var isLoggedIn = false
     @Published var isLoading = false
+    @Published var didCreateAccount = false
     @Published var user: LoginUser?
 
     func createUser(email: String, password: String, name: String, current_week: String, dueDate: Date) {
@@ -37,7 +38,7 @@ class AuthViewModel: ObservableObject {
                 switch result {
                 case .success:
                     print("User created successfully")
-                    self.isLoggedIn = true
+                    self.didCreateAccount = true
 
                 case .failure(let error):
                     print("Create user failed:", error)

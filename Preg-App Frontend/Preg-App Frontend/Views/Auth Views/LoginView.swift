@@ -18,32 +18,45 @@ struct LoginView: View {
     @State private var cWoP = ""
 
     var body: some View {
-        VStack {
-            
-            Text("Pregnancy App")
-                .foregroundColor(Color(#colorLiteral(red: 0.7978933454, green: 0.6680648923, blue: 0.6557773948, alpha: 1)))
-                .font(.system(size: 20, weight: .bold, design: .serif))
-            Spacer()
-                .frame(height: 35)
-
-            TextField("Email", text: $email)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-            
-            SecureField("Password", text: $password)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-
-            Spacer()
-                .frame(height: 35)
-
-            Button("Login") {
-                authViewModel.login(email: email, password: password)
+        NavigationStack{
+            VStack {
+                
+                Text("Pregnancy App")
+                    .foregroundColor(Color(#colorLiteral(red: 0.7978933454, green: 0.6680648923, blue: 0.6557773948, alpha: 1)))
+                    .font(.system(size: 20, weight: .bold, design: .serif))
+                Spacer()
+                    .frame(height: 35)
+                
+                TextField("Email", text: $email)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                
+                SecureField("Password", text: $password)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                
+                Spacer()
+                    .frame(height: 35)
+                
+                Button("Login") {
+                    authViewModel.login(email: email, password: password)
+                }
+                .padding()
+                
+                
+                NavigationLink {
+                    CreateUserView()
+                } label: {
+                    Text("Create User")
+                        .foregroundColor(.blue)
+                        .padding()
+                }
+                
+                if authViewModel.isLoading {
+                    Text("Loading...")
+                }
             }
-
-            if authViewModel.isLoading {
-                Text("Loading...")
-            }
+            .padding()
         }
-        .padding()
+        .navigationBarBackButtonHidden(true)
     }
 }
 

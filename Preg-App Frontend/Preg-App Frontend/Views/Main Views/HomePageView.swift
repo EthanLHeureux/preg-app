@@ -8,23 +8,31 @@
 import SwiftUI
 
 struct HomePageView: View {
+    
+    @StateObject var weekVM = WeekViewModel()
+    
     var body: some View {
         ZStack{
             Color(#colorLiteral(red: 1, green: 0.9435498118, blue: 0.8799069524, alpha: 1))
                 .ignoresSafeArea()
+            
             VStack {
+                
                 HStack{
-                    Text("# WEEK AND # DAYS")
+                    Text("Week \(weekVM.current_week)")
                         .foregroundColor(Color(#colorLiteral(red: 0.7978933454, green: 0.6680648923, blue: 0.6557773948, alpha: 1)))
                         .font(.system(size: 20, weight: .bold, design: .serif))
+                    
                     Spacer()
-                        .frame(width: 130)
+                        .frame(width: 255)
                 }
+                
                 RoundedRectangle(cornerRadius: 20)
-                    .fill((.pink.opacity(0.4)))
+                    .fill(.pink.opacity(0.4))
                     .frame(width: 350, height: 80)
                     .overlay(
-                        Text("Verse").foregroundColor(.white)
+                        Text("Verse")
+                            .foregroundColor(.white)
                     )
                 
                 HStack {
@@ -32,46 +40,89 @@ struct HomePageView: View {
                         .fill(.black)
                         .frame(width: 160, height: 300)
                         .overlay(
-                            Text("Picture").foregroundColor(.white)
+                            VStack {
+                                Text("Picture")
+                                    .foregroundColor(.white)
+                            }
                         )
+                    
                     VStack{
                         Rectangle()
                             .fill(.black)
                             .frame(width: 170, height: 95)
                             .overlay(
-                                Text("Data").foregroundColor(.white)
+                                Text(weekVM.current_week_data?.mother.commonSymptoms[0] ?? "")
+                                    .foregroundColor(.white)
                             )
+                        
                         Rectangle()
                             .fill(.black)
                             .frame(width: 170, height: 95)
                             .overlay(
-                                Text("Data").foregroundColor(.white)
+                                Text(weekVM.current_week_data?.mother.commonSymptoms[1] ?? "")
+                                    .foregroundColor(.white)
                             )
+                        
                         Rectangle()
                             .fill(.black)
                             .frame(width: 170, height: 95)
                             .overlay(
-                                Text("Data").foregroundColor(.white)
+                                Text(weekVM.current_week_data?.mother.emotionalChanges[2] ?? "")
+                                    .foregroundColor(.white)
                             )
                     }
-                    
                 }
                 
                 HStack{
                     RoundedRectangle(cornerRadius: 20)
-                        .fill((.pink.opacity(0.4)))
+                        .fill(.pink.opacity(0.4))
                         .frame(width: 170, height: 200)
                         .overlay(
-                            Text("Mom").foregroundColor(.white)
+                            VStack {
+                                
+                                Text("Mom")
+                                    .foregroundColor(.white)
+                                    .padding(5)
+                                
+                                VStack(alignment: .leading, spacing: 6) {
+                                    
+                                    Text("• \(weekVM.current_week_data?.mother.bodyChanges[0] ?? "")")
+                                    Text("• \(weekVM.current_week_data?.mother.bodyChanges[1] ?? "")")
+                                    Text("• \(weekVM.current_week_data?.mother.emotionalChanges.first ?? "")")
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .foregroundColor(.white)
+                            }
                         )
+                    
                     RoundedRectangle(cornerRadius: 20)
-                        .fill((.pink.opacity(0.4)))
+                        .fill(.pink.opacity(0.4))
                         .frame(width: 170, height: 200)
                         .overlay(
-                            Text("Baby").foregroundColor(.white)
+                            VStack {
+                                
+                                Text("Baby")
+                                    .foregroundColor(.white)
+                                    .padding(5)
+                                
+                                VStack(alignment: .leading, spacing: 6) {
+                                    
+                                    Text("•  \(weekVM.current_week_data?.baby.expectedDevelopment[0] ?? "")")
+                                        .foregroundColor(.white)
+                                    Text("•  \(weekVM.current_week_data?.baby.sizeComparison ?? "")")
+                                        .foregroundColor(.white)
+                                    Text("•  \(weekVM.current_week_data?.baby.expectedWeight ?? "")")
+                                        .foregroundColor(.white)
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .foregroundColor(.white)
+                            }
                         )
                 }
             }
+        }
+        .onAppear {
+            weekVM.fetchWeek()
         }
     }
 }
