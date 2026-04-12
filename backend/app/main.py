@@ -1,22 +1,23 @@
 from fastapi import FastAPI
-from contextlib import asynccontextmanager
-from app.database import client  
+from fastapi.middleware.cors import CORSMiddleware
+#from contextlib import asynccontextmanager
+from app.routes import user_routes, home_routes, devotions_routes, resources_routes
+#from database import client
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    try:
-        # Motor's way of pinging the server
-        await client.admin.command('ping')
-        print("✨ Connected to MongoDB Atlas successfully!")
-    except Exception as e:
-        print(f"❌ Database connection error: {e}")
-    yield
-    # Motor clients don't strictly require a close() on lifespan 
-    client.close()
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI(title="Pregnancy App API")
 
-@app.get("/")
-async def health_check():
-    return {"status": "online", "app": "Pregnancy App API"}
+# ---CORS Setup for Xcode---
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
+# ---Routers---
+app.include_router(user_routes.router)
+app.include_router(home_routes.router)
+app.include_router(devotions_routes.router)
+app.include_router(resources_routes.router)
