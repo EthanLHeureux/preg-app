@@ -18,6 +18,7 @@ async def create_user_profile(user: UserProfile = Body(...)):
     if isinstance(user_data.get("dueDate"), date):
         user_data["dueDate"] = datetime.combine(user_data["dueDate"], datetime.min.time())
 
+    # Check if the email is already registered.
     if await db["Users"].find_one({"email": user_data["email"]}):
         raise HTTPException(status_code=400, detail="Email already registered")
 

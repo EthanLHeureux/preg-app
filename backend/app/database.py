@@ -1,12 +1,12 @@
 from motor.motor_asyncio import AsyncIOMotorClient
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     mongodb_uri: str
     database_name: str = "pregnancy_app"
 
-    class Config:
-        env_file = ".env"
+    # Changed due to automated script tests needing updated way to load .env file.
+    model_config = SettingsConfigDict(env_file=".env")
 
 settings = Settings()
 
