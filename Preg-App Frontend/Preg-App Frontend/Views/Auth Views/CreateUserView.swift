@@ -15,54 +15,53 @@ struct CreateUserView: View {
     @State private var email = ""
     @State private var dueDate = Date()
     @State private var password = ""
-    @State private var currentWeek = ""
+    @State private var current_week = ""
 
     var body: some View {
-        VStack {
-            
-            Text("Pregnancy App")
-                .foregroundColor(Color(#colorLiteral(red: 0.7978933454, green: 0.6680648923, blue: 0.6557773948, alpha: 1)))
-                .font(.system(size: 20, weight: .bold, design: .serif))
-            Spacer()
-                .frame(height: 35)
-            
-            TextField("Name", text: $name)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+        NavigationStack {
+            VStack {
 
-            TextField("Email", text: $email)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-            
-            SecureField("Password", text: $password)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-            
-            TextField("Current Week of Pregnancy", text: $currentWeek)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-            
-            DatePicker("Due Date", selection: $dueDate, displayedComponents: .date)
-            
-            Spacer()
-                .frame(height: 35)
+                Text("Pregnancy App")
+                    .font(.system(size: 20, weight: .bold))
 
+                Spacer().frame(height: 35)
 
-            Button("Create User") {
-                authViewModel.createUser(
-                    email: email,
-                    password: password,
-                    name: name,
-                    currentWeek: currentWeek,
-                    dueDate: dueDate
-                )
+                TextField("Name", text: $name)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+
+                TextField("Email", text: $email)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+
+                SecureField("Password", text: $password)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+
+                TextField("Current Week of Pregnancy", text: $current_week)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+
+                DatePicker("Due Date", selection: $dueDate, displayedComponents: .date)
+
+                Spacer().frame(height: 35)
+
+                Button("Create User") {
+                    authViewModel.createUser(
+                        email: email,
+                        password: password,
+                        name: name,
+                        current_week: current_week,
+                        dueDate: dueDate
+                    )
+                }
+
+                if authViewModel.isLoading {
+                    Text("Loading...")
+                }
             }
+            .padding()
 
-            if authViewModel.isLoading {
-                Text("Loading...")
+
+            .navigationDestination(isPresented: $authViewModel.isLoggedIn) {
+                LoginView()
             }
         }
-        .padding()
     }
-}
-
-#Preview {
-    CreateUserView()
-        .environmentObject(AuthViewModel())
 }

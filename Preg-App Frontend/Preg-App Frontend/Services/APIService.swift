@@ -14,7 +14,7 @@ class APIService {
         email: String,
         password: String,
         name: String,
-        currentWeek: Int,
+        current_week: Int,
         dueDate: Date,
         completion: @escaping (Result<String, Error>) -> Void
     ) {
@@ -29,12 +29,16 @@ class APIService {
             email: email,
             password: password,
             name: name,
-            current_week: currentWeek,
-            due_date: dueDate
+            current_week: current_week,
+            dueDate: dueDate
         )
 
         let encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .iso8601
+        encoder.dateEncodingStrategy = .formatted({
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+            return formatter
+        }())
 
         request.httpBody = try? encoder.encode(body)
 

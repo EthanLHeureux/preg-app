@@ -14,11 +14,11 @@ class AuthViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var user: LoginUser?
 
-    func createUser(email: String, password: String, name: String, currentWeek: String, dueDate: Date) {
+    func createUser(email: String, password: String, name: String, current_week: String, dueDate: Date) {
 
         isLoading = true
         
-        guard let weekInt = Int(currentWeek) else {
+        guard let weekInt = Int(current_week) else {
                 print("Must be number")
                 return
             }
@@ -27,7 +27,7 @@ class AuthViewModel: ObservableObject {
             email: email,
             password: password,
             name: name,
-            currentWeek: weekInt,
+            current_week: weekInt,
             dueDate: dueDate
         ) { result in
 
@@ -37,6 +37,7 @@ class AuthViewModel: ObservableObject {
                 switch result {
                 case .success:
                     print("User created successfully")
+                    self.isLoggedIn = true
 
                 case .failure(let error):
                     print("Create user failed:", error)

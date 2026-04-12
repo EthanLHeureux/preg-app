@@ -12,5 +12,5 @@ struct CreateUser: Codable {
     let password: String
     let name: String
     let current_week: Int
-    let due_date: Date
+    let dueDate: Date
 }
