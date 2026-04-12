@@ -18,7 +18,7 @@ class WeekViewModel: ObservableObject {
     
     private let baseURL = "http://127.0.0.1:8000/home/"
     
-    // MARK: - Fetch Week Data
+
     func fetchWeek() {
         guard let url = URL(string: "\(baseURL)\(current_week)") else {
             errorMessage = "Invalid URL"
@@ -67,10 +67,9 @@ class WeekViewModel: ObservableObject {
         }.resume()
     }
     
-    // MARK: - Navigation
     
     func nextWeek() {
-        guard current_week < 40 else { return } // pregnancy max ~40 weeks
+        guard current_week < 40 else { return }
         current_week += 1
         fetchWeek()
     }
@@ -81,7 +80,6 @@ class WeekViewModel: ObservableObject {
         fetchWeek()
     }
     
-    // MARK: - Set Week (for future use like due date calc)
     
     func setWeek(_ week: Int) {
         guard week >= 1 && week <= 40 else { return }

@@ -5,6 +5,7 @@
 //  Created by Abraham Gomez Jr on 4/11/26.
 //
 
+
 import SwiftUI
 
 struct HomePageView: View {
@@ -18,14 +19,33 @@ struct HomePageView: View {
             
             VStack {
                 
-                HStack{
+                HStack {
+                    
+                    Button(action: {
+                        weekVM.previousWeek()
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .font(.title2)
+                            .foregroundColor(.brown)
+                    }
+                    
+                    Spacer()
+                    
                     Text("Week \(weekVM.current_week)")
-                        .foregroundColor(Color(#colorLiteral(red: 0.7978933454, green: 0.6680648923, blue: 0.6557773948, alpha: 1)))
+                        .foregroundColor(Color(#colorLiteral(red: 0.7978, green: 0.6680, blue: 0.6557, alpha: 1)))
                         .font(.system(size: 20, weight: .bold, design: .serif))
                     
                     Spacer()
-                        .frame(width: 255)
+                    
+                    Button(action: {
+                        weekVM.nextWeek()
+                    }) {
+                        Image(systemName: "chevron.right")
+                            .font(.title2)
+                            .foregroundColor(.brown)
+                    }
                 }
+                .padding(.horizontal)
                 
                 RoundedRectangle(cornerRadius: 20)
                     .fill(.pink.opacity(0.4))
