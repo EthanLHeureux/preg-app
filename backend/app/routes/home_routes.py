@@ -1,3 +1,19 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
+from app.database import db
 
 router = APIRouter()
+
+@router.get("/home")
+async def get_home_data(week: int):
+    
+    # 1. Fetch the home data from MongoDB
+    home_data = await db["Weeks"].find_one({"week": week})
+    
+    
+    if not home_data:
+        raise HTTPException(status_code=404, detail="Home data not found")
+    
+    # 2. Clean the ID for Swift
+    home_data["_id"] = str(home_data["_id"])
+    
+    return home_data
