@@ -1,4 +1,5 @@
 from fastapi import Body, APIRouter, HTTPException, status
+from app.security import hash_password, verify_password
 from app.models import UserProfile, LoginRequest
 from datetime import datetime, date
 from app.database import db  
@@ -21,6 +22,9 @@ async def create_user_profile(user: UserProfile = Body(...)):
     # Check if the email is already registered.
     if await db["Users"].find_one({"email": user_data["email"]}):
         raise HTTPException(status_code=400, detail="Email already registered")
+
+    # Hash and Salt password before storing it in the database for security.
+    user_data["password"] = hash_password(user_data["password"])
 
     new_user = await db["Users"].insert_one(user_data)
     
@@ -51,11 +55,8 @@ async def login(credentials: LoginRequest):
 
     user = await db["Users"].find_one({"email": credentials.email})
     
-    if not user or user["password"] != credentials.password:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid email or password"
-        )
+    if not user or not verify_password(credentials.password, user["password"]):
+        raise HTTPException( status_code=status.HTTP_401_UNAUTHORIZED,detail="Invalid email or password")
     
     user["_id"] = str(user["_id"])
     
