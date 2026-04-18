@@ -31,7 +31,7 @@ This is the FastAPI backend for the Pregnancy App. It connects to MongoDB Atlas.
 
 
 <!--VERSION 2-->
-# 🤰 Pregnancy App Backend
+# Pregnancy App 
 
 **A specialized API ecosystem bridging native iOS development with cloud-hosted data management. This backend serves as the single source of truth for pregnancy progression tracking, weekly devotional content, and educational resource delivery.**
 
