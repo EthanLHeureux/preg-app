@@ -41,15 +41,15 @@ This is the FastAPI backend for the Pregnancy App. It connects to MongoDB Atlas.
 
 ### The Problem
 
-The 40-week journey of pregnancy is often accompanied by an overwhelming amount of fragmented information. Expecting parents frequently struggle to find a single, cohesive space that balances physical health tracking with spiritual and emotional wellness. Traditional resources are often either purely clinical or entirely disconnected from the user’s specific timeline.
+The 40 Week journey of pregnancy is often accompanied by an overwhelming amount of fragmented information. Expecting parents frequently struggle to find a single, cohesive space that balances physical health tracking with spiritual and emotional wellness. Traditional resources are often either purely clinical or entirely disconnected from the user’s specific timeline.
 
 ### Our Solution
 
 This application provides a week-by-week companion experience. By synchronizing a high-performance FastAPI backend with a native Swift interface, we deliver:
 
-  * **Synchronized Tracking:** Real-time profile management that adapts to the user's current week stage of pregnancy.
-  * **Holistic Support:** A "Traversable Devotion" system that offers spiritual and mental encouragement tailored to the specific challenges of each week.
-  * **Validated Resources:** A curated resource page of educational materials to replace "information overload" with relevant knowledge.
+  * **Term Tracking:** Given mother and baby information that updates according to the user's current week of pregnancy.
+  * **Traversable structure:** A "Traversable week" system that offers information  to past and future weeks, tailored towards a specific week of pregnancy.
+  * **Validated accounting:** A specialized account per user secured and verified upon creation and login.
 
 -----
 
