@@ -123,38 +123,6 @@ Due to specific security protocols on macOS, Python requires an explicit certifi
 /Applications/Python\ 3.12/Install\ Certificates.command
 ```
 
------
-
-## 📂 Project Architecture
-
-The project utilizes a **Modular Router Pattern** to ensure the codebase remains maintainable, scalable, and friendly to collaborative development.
-
-```text
-├── main.py              # Entry point & Router registration
-├── database.py          # MongoDB connection logic & Settings
-├── models.py            # Pydantic data schemas (Data Validation)
-├── security.py          # Authentication utilities and password hashing
-├── .env                 # Environment Secrets (Git Ignored)
-└── routes/              # Modular API Feature Folders
-    ├── __init__.py      # Package initialization
-    ├── user_routes.py   # Profile creation & management
-    ├── home_routes.py   # Dashboard & Progress data
-    ├── devotion_routes.py # Traversable weekly content
-    └── resource_routes.py # Static educational content
-```
-
------
-
-## 🔗 API Reference
-
-The backend exposes several RESTful endpoints designed for consumption by the Swift/iOS frontend.
-
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `POST` | `/users/profile` | Serializes and saves a new user profile to MongoDB. |
-| `GET` | `/home` | Aggregates user progress and daily messages for the dashboard. |
-| `GET` | `/devotions/{week}` | Fetches static devotional content indexed by pregnancy week. |
-| `GET` | `/resources` | Retrieves a structured list of educational links and articles. |
 
 -----
 
