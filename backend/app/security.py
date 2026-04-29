@@ -1,6 +1,6 @@
 from passlib.context import CryptContext
 
-# This tells Passlib to use bcrypt and handles the "salting" automatically
+# This tells Passlib to use bcrypt and handles the "salting" automatically.
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def hash_password(password: str) -> str:

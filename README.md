@@ -37,7 +37,7 @@ This is the FastAPI backend for the Pregnancy App. It connects to MongoDB Atlas.
 
 -----
 
-## 🌟 Project Overview
+## 🌟 Project Overview (In progress)
 
 ### The Problem
 

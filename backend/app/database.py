@@ -12,6 +12,3 @@ settings = Settings()
 
 client = AsyncIOMotorClient(settings.mongodb_uri)
 db = client[settings.database_name]
-
-def get_collection(name: str):
-    return db[name]
