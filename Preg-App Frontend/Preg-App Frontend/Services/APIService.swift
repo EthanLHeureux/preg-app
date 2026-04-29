@@ -42,10 +42,21 @@ class APIService {
 
         request.httpBody = try? encoder.encode(body)
 
-        URLSession.shared.dataTask(with: request) { data, _, error in
+        URLSession.shared.dataTask(with: request) { data, response, error in
 
             if let error = error {
                 completion(.failure(error))
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse,
+                (200...299).contains(httpResponse.statusCode) else {
+                    
+                completion(.failure(NSError(
+                    domain: "HTTPError",
+                    code: 0,
+                    userInfo: [NSLocalizedDescriptionKey: "Request failed"]
+                )))
                 return
             }
 
@@ -71,15 +82,37 @@ class APIService {
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
 
         URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode) else {
+                
+                completion(.failure(NSError(
+                    domain: "HTTPError",
+                    code: 0,
+                    userInfo: [NSLocalizedDescriptionKey: "Login failed"]
+                )))
+                return
+            }
 
-            if let data = data {
-                do {
-                    let user = try JSONDecoder().decode(LoginUser.self, from: data)
-                    completion(.success(user))
-                } catch {
-                    completion(.failure(error))
-                }
-            } else if let error = error {
+            guard let data = data else {
+                completion(.failure(NSError(
+                    domain: "DataError",
+                    code: 0,
+                    userInfo: [NSLocalizedDescriptionKey: "No data returned"]
+                )))
+                return
+                
+            }
+            
+            do {
+                let user = try JSONDecoder().decode(LoginUser.self, from: data)
+                completion(.success(user))
+            } catch {
                 completion(.failure(error))
             }
 

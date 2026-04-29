@@ -51,7 +51,7 @@ class AuthViewModel: ObservableObject {
     func login(email: String, password: String) {
 
         isLoading = true
-
+        
         APIService.shared.login(email: email, password: password) { result in
 
             DispatchQueue.main.async {

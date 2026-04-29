@@ -10,6 +10,7 @@ import SwiftUI
 
 struct HomePageView: View {
     
+    @EnvironmentObject var authViewModel: AuthViewModel
     @StateObject var weekVM = WeekViewModel()
     
     var body: some View {
@@ -142,11 +143,14 @@ struct HomePageView: View {
             }
         }
         .onAppear {
-            weekVM.fetchWeek()
+            if let userWeek = authViewModel.user?.current_week {
+                weekVM.setWeek(userWeek)
+            }
         }
     }
 }
 
 #Preview {
     HomePageView()
+        .environmentObject(AuthViewModel())
 }

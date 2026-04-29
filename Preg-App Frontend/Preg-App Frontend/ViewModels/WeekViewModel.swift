@@ -20,6 +20,7 @@ class WeekViewModel: ObservableObject {
     
 
     func fetchWeek() {
+        
         guard let url = URL(string: "\(baseURL)\(current_week)") else {
             errorMessage = "Invalid URL"
             return
@@ -80,10 +81,9 @@ class WeekViewModel: ObservableObject {
         fetchWeek()
     }
     
-    
     func setWeek(_ week: Int) {
-        guard week >= 1 && week <= 40 else { return }
-        current_week = week
+        self.current_week = week
         fetchWeek()
     }
+    
 }

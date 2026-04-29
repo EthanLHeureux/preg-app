@@ -12,4 +12,5 @@ import Foundation
 nonisolated struct LoginUser: Codable {
     let email: String
     let password: String
+    let current_week: Int
 }
