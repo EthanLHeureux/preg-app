@@ -11,16 +11,21 @@ struct LoginView: View {
 
     @EnvironmentObject var authViewModel: AuthViewModel
 
-    @State private var name = ""
+    // These are variables that are private to the LoginView and that won't have their values erased
+    // due to @State. The right hand sides of the equal signs are defintions of types that the variable
+    // is expecting. They will contain the values of the user input which is stored in the $ versions of
+    // these variables.
     @State private var email = ""
-    @State private var dueDate = Date()
     @State private var password = ""
-    @State private var cWoP = ""
 
     var body: some View {
+        
+        // Allows transfer from view to view based on the navigation link.
         NavigationStack{
+            
+            // Holds the input boxes for the login page.
             VStack {
-                
+            
                 Text("Pregnancy App")
                     .foregroundColor(Color(#colorLiteral(red: 0.7978933454, green: 0.6680648923, blue: 0.6557773948, alpha: 1)))
                     .font(.system(size: 20, weight: .bold, design: .serif))
@@ -36,6 +41,7 @@ struct LoginView: View {
                 Spacer()
                     .frame(height: 35)
                 
+                // Calls to the login function inside of authViewModel to validate the credentials.
                 Button("Login") {
                     authViewModel.login(email: email, password: password)
                 }
@@ -50,6 +56,7 @@ struct LoginView: View {
                         .padding()
                 }
                 
+                // Ensures that loading is shown on the page when credentials are being validated.
                 if authViewModel.isLoading {
                     Text("Loading...")
                 }

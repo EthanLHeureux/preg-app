@@ -42,6 +42,7 @@ struct CreateUserView: View {
 
                 Spacer().frame(height: 35)
 
+                // Uses the authViewModel create user function to create the user. All of the user inputed data are arguements.
                 Button("Create User") {
                     authViewModel.createUser(
                         email: email,
@@ -58,7 +59,7 @@ struct CreateUserView: View {
             }
             .padding()
 
-
+            // Navigates to LoginView once authViewModel provides confirmation of the creation of a user.
             .navigationDestination(isPresented: $authViewModel.didCreateAccount) {
                 LoginView()
             }

@@ -8,20 +8,30 @@
 
 import SwiftUI
 
+// Struct used because views should be temporary and recomputed when states change. A class would be too persistent.
 struct HomePageView: View {
     
+    
+    // WeekViewModel is created as a state object here since it is only displayed on the home page.
     @EnvironmentObject var authViewModel: AuthViewModel
     @StateObject var weekVM = WeekViewModel()
     
+    // Controls the homepage design.
     var body: some View {
+        
+        // ZStack controls the depth of the design. This means that things placed towards the top of the stack will be
+        // placed in the background, while things placed at the bottom are in the front.
         ZStack{
             Color(#colorLiteral(red: 1, green: 0.9435498118, blue: 0.8799069524, alpha: 1))
                 .ignoresSafeArea()
             
+            // VStack controls vertically stacked items.
             VStack {
                 
+                // HStack controls horizontally stacked items.
                 HStack {
                     
+                    // Left arrow button, which contains an action that will ensure new week data is displayed.
                     Button(action: {
                         weekVM.previousWeek()
                     }) {
@@ -38,6 +48,7 @@ struct HomePageView: View {
                     
                     Spacer()
                     
+                    // Right arrow button with similar action as the left button.
                     Button(action: {
                         weekVM.nextWeek()
                     }) {
@@ -48,6 +59,7 @@ struct HomePageView: View {
                 }
                 .padding(.horizontal)
                 
+                // Verse box
                 RoundedRectangle(cornerRadius: 20)
                     .fill(.pink.opacity(0.4))
                     .frame(width: 350, height: 80)
@@ -57,6 +69,8 @@ struct HomePageView: View {
                     )
                 
                 HStack {
+                    
+                    // Picture box
                     Rectangle()
                         .fill(.black)
                         .frame(width: 160, height: 300)
@@ -67,6 +81,8 @@ struct HomePageView: View {
                             }
                         )
                     
+                    // These stacked rectangles contain common symptoms and an emotional change the mother
+                    //may feel during specific weeks.
                     VStack{
                         Rectangle()
                             .fill(.black)
@@ -94,6 +110,7 @@ struct HomePageView: View {
                     }
                 }
                 
+                // Contains the mother and baby boxes.
                 HStack{
                     RoundedRectangle(cornerRadius: 20)
                         .fill(.pink.opacity(0.4))
@@ -142,6 +159,9 @@ struct HomePageView: View {
                 }
             }
         }
+        
+        // When the view is called, this allows the inital week display to be that of the users
+        // current week of pregnancy,
         .onAppear {
             if let userWeek = authViewModel.user?.current_week {
                 weekVM.setWeek(userWeek)

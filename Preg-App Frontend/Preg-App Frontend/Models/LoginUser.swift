@@ -7,8 +7,7 @@
 
 import Foundation
 
-// Codable encodes and decodes the JSON into Swift or vice versa
-// Identifiable allows each User to be uniquely identifiable
+// Nonisolated is used to allow this struct to be used in both the main thread and HTTP response background thread.
 nonisolated struct LoginUser: Codable {
     let email: String
     let password: String

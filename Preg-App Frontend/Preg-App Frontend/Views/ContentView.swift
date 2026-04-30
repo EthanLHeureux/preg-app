@@ -9,11 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     
-    // Allows access to the shared AuthViewModel from anywhere in the app
-    // THIS IS AN EXAMPLE OF OBSERVER DESIGN PATTERN
+    // Accepts the authViewModel instance injection from App start.
     @EnvironmentObject var authViewModel: AuthViewModel
     
-    // Directs to a specific view page depending on login status
+    // Directs to a specific view page depending on user login status.
     var body: some View {
         Group{
             if authViewModel.isLoggedIn {
